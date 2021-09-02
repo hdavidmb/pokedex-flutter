@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/pokemon_list/presentation/pokemon_list_page.dart';
 
 class AppWidget extends StatelessWidget {
   // This widget is the root of your application.
@@ -9,7 +10,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: PokemonListPage(),
     );
   }
 }
