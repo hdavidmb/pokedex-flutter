@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' show AssetImage, Color;
+import 'package:flutter/material.dart' show AssetImage, Color, HSLColor;
 import 'package:pokedex_flutter/config/app_colors.dart';
 import 'package:pokedex_flutter/config/app_images.dart';
 
@@ -108,5 +108,38 @@ extension TypesX on Types {
       default:
         return AppImages.normalTypeIcon;
     }
+  }
+
+  String get name =>
+      '${this.toString()[6].toUpperCase()}${this.toString().substring(7)}';
+
+  Color get darkColor {
+    final color = this.color;
+    final amount = 0.05; // * Must be between 0.0 and 1.0
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+
+  Color get lightColor {
+    final color = this.color;
+    final amount = 0.05; // * Must be between 0.0 and 1.0
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
+  }
+
+  Color get chipColor {
+    final color = this.color;
+    final amount = 0.08; // * Must be between 0.0 and 1.0
+
+    final hsl = HSLColor.fromColor(color);
+    final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+
+    return hslDark.toColor();
   }
 }
