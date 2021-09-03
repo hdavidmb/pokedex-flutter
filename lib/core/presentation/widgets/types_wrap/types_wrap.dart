@@ -7,7 +7,7 @@ class TypesWrap extends StatelessWidget {
   const TypesWrap({
     Key? key,
     required this.types,
-    this.itemHeight = 25.0,
+    this.itemHeight = 24.0,
   }) : super(key: key);
 
   @override
@@ -30,13 +30,14 @@ class TypeChip extends StatelessWidget {
   const TypeChip({
     Key? key,
     required this.type,
-    this.itemHeight = 25.0,
+    this.itemHeight = 24.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final double padding = 5.0;
     return Container(
-      padding: const EdgeInsets.all(4.0),
+      padding: EdgeInsets.all(padding),
       height: itemHeight,
       decoration: BoxDecoration(
           color: type.chipColor, borderRadius: BorderRadius.circular(4.0)),
@@ -49,7 +50,8 @@ class TypeChip extends StatelessWidget {
           const SizedBox(width: 4.0),
           Text(
             type.name,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color: Colors.white, fontSize: itemHeight - padding * 2 - 2),
           ),
         ],
       ),
