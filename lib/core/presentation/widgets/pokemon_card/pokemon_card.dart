@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
@@ -32,10 +33,13 @@ class PokemonCard extends StatelessWidget {
             right: itemHeight * 0.1,
             child: Hero(
               tag: pokemon.name, //TODO: sync with details image
-              child: Image(
-                image: NetworkImage(pokemon.imageUrl),
-                height: itemHeight * 1.08,
-              ),
+              child: CachedNetworkImage(
+                  imageUrl: pokemon.imageUrl, height: itemHeight * 1.08),
+
+              // Image(
+              //   image: NetworkImage(pokemon.imageUrl),
+              //   height: itemHeight * 1.08,
+              // ),
             ),
           ),
           Positioned(
