@@ -19,42 +19,63 @@ class _PokemonListPageState extends State<PokemonListPage> {
       name: 'Bulbasaur',
       types: [Types.grass, Types.poison],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
     ),
     PokemonListItem(
       number: 2,
       name: 'Ivysaur',
       types: [Types.grass, Types.poison],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png',
     ),
     PokemonListItem(
       number: 3,
       name: 'Venusaur',
       types: [Types.grass, Types.poison],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png',
     ),
     PokemonListItem(
       number: 4,
       name: 'Charmander',
       types: [Types.fire],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/004.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
     ),
     PokemonListItem(
       number: 5,
       name: 'Charmeleon',
       types: [Types.fire],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/005.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png',
     ),
     PokemonListItem(
       number: 6,
       name: 'Charizard',
-      types: [Types.fire],
+      types: [Types.fire, Types.flying],
       imageUrl:
-          'https://assets.pokemon.com/assets/cms2/img/pokedex/detail/006.png',
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png',
+    ),
+    PokemonListItem(
+      number: 7,
+      name: 'Squirtle',
+      types: [Types.water],
+      imageUrl:
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png',
+    ),
+    PokemonListItem(
+      number: 8,
+      name: 'Wartortle',
+      types: [Types.water],
+      imageUrl:
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png',
+    ),
+    PokemonListItem(
+      number: 9,
+      name: 'Blastoise',
+      types: [Types.water],
+      imageUrl:
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
     ),
   ];
 
@@ -70,7 +91,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0),
+        padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: ListView.builder(
             itemCount: pokemonList.length,
             itemBuilder: (_, index) =>
