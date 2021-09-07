@@ -22,12 +22,16 @@ class PokemonListChangeNotifier extends ChangeNotifier {
   Future<void> getPokemonList() async {
     if (state != PokemonListState.loading()) {
       _state = PokemonListState.loading();
-      final result = await pokemonListDataSource.getPokemonList(page: _page);
+      print('*********** fetching pokemon ****************'); //TODO delete
+      final result = await pokemonListDataSource.getPokemonList(
+          page: _page, limit: 10); //TODO delete limit
       result.fold(
         (l) => _state = PokemonListState.error(),
         (r) {
-          pokemonList.addAll(r);
-          _page++;
+          if (r.isNotEmpty) {
+            pokemonList.addAll(r);
+            _page++;
+          }
           _state = PokemonListState.ready();
         },
       );
