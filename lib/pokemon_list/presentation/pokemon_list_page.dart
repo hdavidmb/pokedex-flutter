@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/pokemon_card/pokemon_card.dart';
 import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
-class PokemonListPage extends StatefulWidget {
+class PokemonListPage extends StatelessWidget {
   PokemonListPage({
     Key? key,
   }) : super(key: key);
 
-  @override
-  _PokemonListPageState createState() => _PokemonListPageState();
-}
-
-class _PokemonListPageState extends State<PokemonListPage> {
   final List<PokemonListItem> pokemonList = [
     PokemonListItem(
       number: 1,
@@ -78,14 +72,6 @@ class _PokemonListPageState extends State<PokemonListPage> {
           'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png',
     ),
   ];
-
-  @override
-  void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      await AppImages.precacheAssets(context);
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
