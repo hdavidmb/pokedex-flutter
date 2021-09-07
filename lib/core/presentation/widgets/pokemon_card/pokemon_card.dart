@@ -9,7 +9,7 @@ class PokemonCard extends StatelessWidget {
       : super(key: key);
 
   final PokemonListItem pokemon;
-  final Function onPressed;
+  final void Function() onPressed;
 
   final double itemHeight = 120.0;
   final double offset = 22.0;
@@ -18,50 +18,48 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          SizedBox(
-            height: itemHeight + offset,
-          ),
-          PokemonCardBackground(
-            type: pokemon.types[0],
-            height: itemHeight,
-          ),
-          Positioned(
-            top: 0.0,
-            right: itemHeight * 0.1,
-            child: Hero(
-              tag: pokemon.name, //TODO: sync with details image
-              child: CachedNetworkImage(
-                  imageUrl: pokemon.imageUrl, height: itemHeight * 1.08),
-
-              // Image(
-              //   image: NetworkImage(pokemon.imageUrl),
-              //   height: itemHeight * 1.08,
-              // ),
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            SizedBox(
+              height: itemHeight + offset,
             ),
-          ),
-          Positioned(
-            left: 25.0,
-            bottom: 20.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('#${pokemon.number.toString().padLeft(3, '0')}'),
-                Text(
-                  pokemon.name,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 2.0),
-                TypesWrap(types: pokemon.types),
-              ],
+            PokemonCardBackground(
+              type: pokemon.types[0],
+              height: itemHeight,
             ),
-          )
-        ],
+            Positioned(
+              top: 0.0,
+              right: itemHeight * 0.1,
+              child: Hero(
+                tag: pokemon.name, //TODO: sync with details image
+                child: CachedNetworkImage(
+                    imageUrl: pokemon.imageUrl, height: itemHeight * 1.08),
+              ),
+            ),
+            Positioned(
+              left: 25.0,
+              bottom: 20.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('#${pokemon.number.toString().padLeft(3, '0')}'),
+                  Text(
+                    pokemon.name,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(height: 2.0),
+                  TypesWrap(types: pokemon.types),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -127,7 +125,7 @@ class PokemonCardBackground extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Colors.white.withOpacity(0.3), Colors.transparent],
-                    stops: [0.0, 0.8]).createShader(bounds);
+                    stops: [0.0, 1.0]).createShader(bounds);
               },
               blendMode: BlendMode.dstIn,
               child: Image(

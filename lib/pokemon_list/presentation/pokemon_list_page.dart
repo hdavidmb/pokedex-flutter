@@ -93,9 +93,15 @@ class _PokemonListPageState extends State<PokemonListPage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),
         child: ListView.builder(
-            itemCount: pokemonList.length,
-            itemBuilder: (_, index) =>
-                PokemonCard(pokemon: pokemonList[index], onPressed: () {})),
+          itemCount: pokemonList.length,
+          itemBuilder: (_, index) => PokemonCard(
+            pokemon: pokemonList[index],
+            onPressed: () {
+              //TODO: Navigaete to pokemon details
+              print(pokemonList[index].name + ' pressed');
+            },
+          ),
+        ),
       ),
     );
   }
