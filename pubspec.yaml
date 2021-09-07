@@ -26,6 +26,7 @@ dependencies:
   dartz: ^0.10.0
   flutter:
     sdk: flutter
+  flutter_riverpod: ^0.14.0+3
   freezed_annotation: ^0.14.2
 
 dev_dependencies:
