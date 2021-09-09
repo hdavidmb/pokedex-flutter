@@ -26,7 +26,7 @@ class _AppWidgetState extends State<AppWidget> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PokemonListPage(),
+      home: PokeInfoView(),
     );
   }
 }
