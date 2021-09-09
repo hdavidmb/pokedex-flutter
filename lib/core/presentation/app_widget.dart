@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/presentation/app_bar.dart';
 import 'package:pokedex_flutter/poke_view/presentation/poke_view.dart';
+import 'package:pokedex_flutter/config/app_images.dart';
+import 'package:pokedex_flutter/pokemon_list/presentation/pokemon_list_page.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _AppWidgetState createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      await AppImages.precacheAssets(context);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,41 +26,7 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const PokeInfoView()));
-                },
-                child: Text("Test 2"))
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const PokeInfoView()));
-        },
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: PokemonListPage(),
     );
   }
 }
