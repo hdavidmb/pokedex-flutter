@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/core/domain/types.dart';
 import 'package:pokedex_flutter/core/presentation/app_bar.dart';
+import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
 
 class PokeInfoView extends StatelessWidget {
   const PokeInfoView({Key? key}) : super(key: key);
@@ -26,13 +28,13 @@ class _Body extends StatelessWidget {
     final backgroundColor = Color(0xFFfba556);
 
     return Container(
+      color: backgroundColor,
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.only(top: 50),
             height: size,
             width: double.infinity,
-            color: backgroundColor,
             child: Center(child: _BodyPokeCard()),
           ),
           _TabBar()
@@ -51,7 +53,7 @@ class _BodyPokeCard extends StatelessWidget {
 
   final String id = "#004";
   final String name = "Charmander";
-  final String type = "fire";
+  final Types type = Types.fire;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +89,7 @@ class _BodyPokeCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
               ),
-              Text(type)
+              TypesWrap(types: [type])
             ],
           ),
         )
@@ -96,67 +98,131 @@ class _BodyPokeCard extends StatelessWidget {
   }
 }
 
-class _TabBar extends StatelessWidget {
+class _TabBar extends StatefulWidget {
   const _TabBar({Key? key}) : super(key: key);
 
   @override
+  __TabBarState createState() => __TabBarState();
+}
+
+class __TabBarState extends State<_TabBar> {
+  int selectedTab = 0;
+
+  selectTab(int tabNumber) {
+    setState(() {
+      this.selectedTab = tabNumber;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      initialIndex: 0,
-      child: Expanded(
-        child: Scaffold(
-          appBar: TabBar(
-            tabs: [
-              Tab(
-                child: _TabContainer(
-                  name: "About",
-                ),
-              ),
-              Tab(
-                child: _TabContainer(
-                  name: "Stats",
-                ),
-              ),
-              Tab(
-                child: _TabContainer(
+    //return _PageViewer();
+    return Expanded(
+      child: Column(
+        children: [
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _Tab(
+                    name: "About",
+                    tabNumber: 0,
+                    selectedTab: selectedTab,
+                    onTap: selectTab),
+                _Tab(
+                    name: "Stats",
+                    tabNumber: 1,
+                    selectedTab: selectedTab,
+                    onTap: selectTab),
+                _Tab(
                   name: "Evolution",
+                  tabNumber: 2,
+                  selectedTab: selectedTab,
+                  onTap: selectTab,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          body: TabBarView(
-            children: [
-              Center(
-                child: Text("It's cloudy here"),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(30),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
+              child: PageView(
+                children: [Text("Hola")],
               ),
-              Center(
-                child: Text("It's rainy here"),
-              ),
-              Center(
-                child: Text("It's sunny here"),
-              ),
-            ],
-          ),
+            ),
+          )
+          //_PageViewer()
+        ],
+      ),
+    );
+  }
+}
+
+class _PageViewer extends StatelessWidget {
+  const _PageViewer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: PageView(
+          children: [Center(child: Text("Hi"))],
         ),
       ),
     );
   }
 }
 
-class _TabContainer extends StatelessWidget {
+class _Tab extends StatelessWidget {
   final String name;
-  final bool isSelected;
+  final int tabNumber;
+  final int selectedTab;
+  final void Function(int number) onTap;
 
-  const _TabContainer({Key? key, required this.name, this.isSelected = false})
-      : super(key: key);
+  const _Tab({
+    Key? key,
+    required this.name,
+    required this.tabNumber,
+    required this.selectedTab,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        name,
-        style: TextStyle(color: Colors.black),
+    return GestureDetector(
+      onTap: () {
+        onTap(tabNumber);
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: 120,
+        height: 70,
+        decoration: selectedTab == tabNumber
+            ? BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/half-pokeball-2.png'),
+                  fit: BoxFit.fill,
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.2),
+                      BlendMode.dstATop), //7 Ver notas
+                ),
+              )
+            : null,
+
+        //color: selectedTab == tabNumber ? Colors.blue : Colors.transparent,
+        child: Text(
+          name,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: selectedTab == tabNumber ? Colors.white : Colors.white30,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
