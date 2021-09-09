@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex_flutter/core/presentation/app_widget.dart';
 
 void main() {
-  runApp(AppWidget());
+  runApp(
+    ProviderScope(
+      child: AppWidget(),
+    ),
+  );
 }
