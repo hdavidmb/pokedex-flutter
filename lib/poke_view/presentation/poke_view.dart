@@ -107,8 +107,34 @@ class _TabBar extends StatefulWidget {
 
 class __TabBarState extends State<_TabBar> {
   int selectedTab = 0;
+  late PageController _pageController;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   selectTab(int tabNumber) {
+    if (tabNumber == this.selectedTab) return;
+
+    setState(() {
+      this.selectedTab = tabNumber;
+      _pageController.animateToPage(
+        tabNumber,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.fastLinearToSlowEaseIn,
+      );
+    });
+  }
+
+  onPageVieweChangePage(int tabNumber) {
     setState(() {
       this.selectedTab = tabNumber;
     });
@@ -149,7 +175,19 @@ class __TabBarState extends State<_TabBar> {
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(20)),
               child: PageView(
-                children: [Text("Hola")],
+                onPageChanged: onPageVieweChangePage,
+                controller: _pageController,
+                children: [
+                  Container(
+                    child: Text("About"),
+                  ),
+                  Container(
+                    child: Text("Stats"),
+                  ),
+                  Container(
+                    child: Text("Evolution"),
+                  ),
+                ],
               ),
             ),
           )
@@ -197,7 +235,9 @@ class _Tab extends StatelessWidget {
       onTap: () {
         onTap(tabNumber);
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.easeInCirc,
         alignment: Alignment.center,
         width: 120,
         height: 70,
