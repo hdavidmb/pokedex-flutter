@@ -7,11 +7,12 @@ part 'pokemon_list_item.freezed.dart';
 
 @freezed
 class PokemonListItem with _$PokemonListItem {
-  const PokemonListItem._();
   const factory PokemonListItem({
     required int number,
     required String name,
     required List<Types> types,
     required String imageUrl,
   }) = _PokemonListItem;
+
+  const PokemonListItem._();
 }

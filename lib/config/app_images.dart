@@ -32,30 +32,30 @@ class AppImages {
   static const steelTypeIcon = _Image('type_icons/steel.png');
   static const waterTypeIcon = _Image('type_icons/water.png');
 
-  static Future precacheAssets(BuildContext context) async {
-    await precacheImage(pokeball, context);
-    await precacheImage(male, context);
-    await precacheImage(female, context);
-    await precacheImage(dotted, context);
-    await precacheImage(pikloader, context);
+  static void precacheAssets(BuildContext context) {
+    precacheImage(pokeball, context);
+    precacheImage(male, context);
+    precacheImage(female, context);
+    precacheImage(dotted, context);
+    precacheImage(pikloader, context);
 
-    await precacheImage(bugTypeIcon, context);
-    await precacheImage(darkTypeIcon, context);
-    await precacheImage(dragonTypeIcon, context);
-    await precacheImage(electricTypeIcon, context);
-    await precacheImage(fairyTypeIcon, context);
-    await precacheImage(fightingTypeIcon, context);
-    await precacheImage(fireTypeIcon, context);
-    await precacheImage(flyingTypeIcon, context);
-    await precacheImage(ghostTypeIcon, context);
-    await precacheImage(grassTypeIcon, context);
-    await precacheImage(groundTypeIcon, context);
-    await precacheImage(iceTypeIcon, context);
-    await precacheImage(normalTypeIcon, context);
-    await precacheImage(poisonTypeIcon, context);
-    await precacheImage(psychicTypeIcon, context);
-    await precacheImage(rockTypeIcon, context);
-    await precacheImage(steelTypeIcon, context);
-    await precacheImage(waterTypeIcon, context);
+    precacheImage(bugTypeIcon, context);
+    precacheImage(darkTypeIcon, context);
+    precacheImage(dragonTypeIcon, context);
+    precacheImage(electricTypeIcon, context);
+    precacheImage(fairyTypeIcon, context);
+    precacheImage(fightingTypeIcon, context);
+    precacheImage(fireTypeIcon, context);
+    precacheImage(flyingTypeIcon, context);
+    precacheImage(ghostTypeIcon, context);
+    precacheImage(grassTypeIcon, context);
+    precacheImage(groundTypeIcon, context);
+    precacheImage(iceTypeIcon, context);
+    precacheImage(normalTypeIcon, context);
+    precacheImage(poisonTypeIcon, context);
+    precacheImage(psychicTypeIcon, context);
+    precacheImage(rockTypeIcon, context);
+    precacheImage(steelTypeIcon, context);
+    precacheImage(waterTypeIcon, context);
   }
 }
