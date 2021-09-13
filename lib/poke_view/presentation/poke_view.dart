@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
 import 'package:pokedex_flutter/core/presentation/app_bar.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
@@ -35,11 +36,84 @@ class _Body extends StatelessWidget {
             padding: EdgeInsets.only(top: 50),
             height: size,
             width: double.infinity,
-            child: Center(child: _BodyPokeCard()),
+            child: _BodyStack(),
           ),
           _TabBar()
         ],
       ),
+    );
+  }
+}
+
+class _BodyStack extends StatelessWidget {
+  const _BodyStack({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double dottedWidh = 100;
+    double stackWidth = MediaQuery.of(context).size.width;
+    double stackHigh = MediaQuery.of(context).size.height;
+
+    print(stackHigh);
+    print(stackWidth);
+    return Stack(
+      children: [
+        Positioned(
+          top: 160,
+          right: 0,
+          child: ShaderMask(
+            shaderCallback: (Rect rect) {
+              return LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Colors.white.withOpacity(0.6),
+                    Colors.white.withOpacity(0.1)
+                  ],
+                  stops: [
+                    0.0,
+                    1.0
+                  ]).createShader(rect);
+            },
+            child: Image(
+              image: AppImages.dotted,
+              width: dottedWidh,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Positioned(
+          top: 35,
+          left: 20,
+          child: ShaderMask(
+            shaderCallback: (Rect rect) {
+              return RadialGradient(
+                // center: Alignment.bottomRight,
+                // focal: Alignment.topLeft,
+                center: Alignment.topLeft,
+                focal: Alignment.bottomRight,
+                radius: 1.009,
+                colors: [
+                  Colors.white,
+                  Colors.white.withOpacity(0.2),
+                  Colors.transparent,
+                ],
+                stops: [
+                  0.0,
+                  2.0,
+                  3.0,
+                ],
+              ).createShader(rect);
+            },
+            child: Image(
+              image: AppImages.pokeball,
+              width: 150,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        _BodyPokeCard(),
+      ],
     );
   }
 }
