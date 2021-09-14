@@ -12,6 +12,7 @@ class AppImages {
   static const female = _Image('female.png');
   static const dotted = _Image('dotted.png');
   static const pikloader = _Image('pika_loader.gif');
+  static const half_pokeBall = _Image('half-pokeball-2.png');
 
   static const bugTypeIcon = _Image('type_icons/bug.png');
   static const darkTypeIcon = _Image('type_icons/dark.png');
@@ -38,6 +39,7 @@ class AppImages {
     await precacheImage(female, context);
     await precacheImage(dotted, context);
     await precacheImage(pikloader, context);
+    await precacheImage(half_pokeBall, context);
 
     await precacheImage(bugTypeIcon, context);
     await precacheImage(darkTypeIcon, context);
