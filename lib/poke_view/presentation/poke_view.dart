@@ -253,7 +253,7 @@ class __TabBarState extends State<_TabBar> {
                 controller: _pageController,
                 children: [
                   Container(
-                    child: Text("About"),
+                    child: _AboutPage(),
                   ),
                   Container(
                     child: Text("Stats"),
@@ -266,6 +266,35 @@ class __TabBarState extends State<_TabBar> {
             ),
           )
           //_PageViewer()
+        ],
+      ),
+    );
+  }
+}
+
+class _AboutPage extends StatelessWidget {
+  const _AboutPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final backgroundColor = Color(0xFFfba556);
+
+    return Container(
+      child: ListView(
+        padding: EdgeInsets.all(0),
+        children: [
+          // Description
+          Container(
+            child: Text("hi"),
+          ),
+          // Pokedex data
+          Container(
+            child: Text("hi"),
+          ),
+          //Training
+          Container(
+            child: Text("hi"),
+          ),
         ],
       ),
     );
@@ -309,33 +338,38 @@ class _Tab extends StatelessWidget {
       onTap: () {
         onTap(tabNumber);
       },
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
-        curve: Curves.easeInCirc,
-        alignment: Alignment.center,
+      child: Container(
         width: 120,
         height: 70,
-        decoration: selectedTab == tabNumber
-            ? BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/half-pokeball-2.png'),
-                  fit: BoxFit.fill,
-                  colorFilter: new ColorFilter.mode(
-                      Colors.black.withOpacity(0.2),
-                      BlendMode.dstATop), //7 Ver notas
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            if (selectedTab == tabNumber)
+              ShaderMask(
+                shaderCallback: (Rect rect) {
+                  return LinearGradient(
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                    colors: [
+                      Colors.white.withOpacity(0.5),
+                      Colors.white.withOpacity(0.05)
+                    ],
+                    stops: [0.0, 1.0],
+                  ).createShader(rect);
+                },
+                child: Image(
+                  image: AppImages.half_pokeBall,
                 ),
-              )
-            : null,
-
-        //color: selectedTab == tabNumber ? Colors.blue : Colors.transparent,
-        child: Text(
-          name,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: selectedTab == tabNumber ? Colors.white : Colors.white30,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+              ),
+            Text(name,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color:
+                      selectedTab == tabNumber ? Colors.white : Colors.white30,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ))
+          ],
         ),
       ),
     );
