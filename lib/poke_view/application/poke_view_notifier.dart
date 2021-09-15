@@ -4,22 +4,22 @@ import 'package:pokedex_flutter/poke_view/application/poke_state.dart';
 import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 
 class PokeViewNotifier extends ChangeNotifier {
-  late PokeState _pokeState;
+  late PokeState _innerPokeState;
   late PokeData _pokeData;
 
   PokeViewNotifier() {
-    _pokeState = Initial();
+    _innerPokeState = Initial();
     _pokeData = PokeData.empty();
   }
 
   set _pokeSate(PokeState newstate) {
     print("Updating the poke sate");
-    this._pokeState = newstate;
+    this._innerPokeState = newstate;
     notifyListeners();
   }
 
-  get pokeState {
-    return _pokeState;
+  PokeState get pokeState {
+    return _innerPokeState;
   }
 
   void fecthPokeData(String pokeId) async {
