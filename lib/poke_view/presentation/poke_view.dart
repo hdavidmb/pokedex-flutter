@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/presentation/app_bar.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/loaders/pika_loading.dart';
 import 'package:pokedex_flutter/poke_view/application/poke_state.dart';
