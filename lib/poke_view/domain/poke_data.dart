@@ -1,9 +1,13 @@
+import 'package:pokedex_flutter/core/domain/types.dart';
+
 class PokeData {
-  String pokeName;
-  int pokeId;
-  String pokeImageUrl;
-  List<String> types;
-  String description;
+  String? pokeName;
+  String? pokeId;
+  String? pokeImageUrl;
+  List<Types>? types;
+  String? description;
+
+  PokeData._empty();
 
   PokeData({
     required this.pokeName,
@@ -12,4 +16,8 @@ class PokeData {
     required this.types,
     required this.description,
   });
+
+  factory PokeData.empty() {
+    return PokeData._empty();
+  }
 }
