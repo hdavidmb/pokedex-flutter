@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_tab.dart';
 
 import 'about_view.dart';
 
 class PokeTabBar extends StatefulWidget {
-  const PokeTabBar({Key? key}) : super(key: key);
+  const PokeTabBar({Key? key, required this.pokeData}) : super(key: key);
+  final PokeData pokeData;
 
   @override
   _TabBarState createState() => _TabBarState();

@@ -4,24 +4,30 @@ import 'package:pokedex_flutter/core/presentation/app_bar.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/loaders/pika_loading.dart';
 import 'package:pokedex_flutter/poke_view/application/poke_state.dart';
 import 'package:pokedex_flutter/poke_view/application/poke_view_providers.dart';
+import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_header.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_tabs.dart';
 
 class PokeInfoView extends StatelessWidget {
   const PokeInfoView({Key? key}) : super(key: key);
 
+  // I recived the PokeName and the color background.
+
   @override
   Widget build(BuildContext context) {
     final pokeViewProvider = context.read(pokeViewNotifierProvider);
-    pokeViewProvider.fecthPokeData('charm');
+    pokeViewProvider.fecthPokeData('charmander');
 
     return Scaffold(
       appBar: appBar,
       extendBodyBehindAppBar: true,
       body: Container(child: Consumer(builder: (context, watch, child) {
-        final pokeState = watch(pokeViewNotifierProvider).pokeState;
+        // Postframe callback
+        final provider = watch(pokeViewNotifierProvider);
+        final pokeState = provider.pokeState;
 
-        if (pokeState == PokeState.ready()) return _Body();
+        if (pokeState == PokeState.ready())
+          return _Body(pokeData: provider.pokeData);
 
         return PikaLoader();
       })),
@@ -30,8 +36,8 @@ class PokeInfoView extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
-
+  const _Body({Key? key, required this.pokeData}) : super(key: key);
+  final PokeData pokeData;
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Color(0xFFfba556);
@@ -40,8 +46,12 @@ class _Body extends StatelessWidget {
       color: backgroundColor,
       child: Column(
         children: [
-          PokeHeader(),
-          PokeTabBar(),
+          PokeHeader(
+            pokeData: pokeData,
+          ),
+          PokeTabBar(
+            pokeData: pokeData,
+          ),
         ],
       ),
     );
