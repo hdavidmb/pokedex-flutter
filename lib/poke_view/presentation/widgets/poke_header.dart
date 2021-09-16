@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
@@ -126,11 +127,13 @@ class _PokeInfoCard extends StatelessWidget {
         Container(
           height: 130,
           width: 130,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(imageUrl),
-          )),
+          child: Hero(
+            tag: name,
+            child: CachedNetworkImage(
+              fit: BoxFit.cover,
+              imageUrl: imageUrl,
+            ),
+          ),
         ),
         SizedBox(
           width: 30,
