@@ -22,6 +22,9 @@ class _TabBarState extends State<PokeTabBar> {
 
   @override
   void initState() {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      context.read(pokeViewNotifierProvider).fecthPokeData(widget.pokeName);
+    });
     _pageController = PageController();
     super.initState();
   }
@@ -107,10 +110,6 @@ class ContentTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      context.read(pokeViewNotifierProvider).fecthPokeData('charman');
-    });
-
     return Consumer(builder: (context, watch, child) {
       final provider = watch(pokeViewNotifierProvider);
       final pokeState = provider.pokeState;
@@ -138,7 +137,9 @@ class ContentTabs extends StatelessWidget {
         controller: pageController,
         children: [
           Container(
-            child: AboutPage(),
+            child: AboutPage(
+              pokeData: pokeData,
+            ),
           ),
           Container(
             child: Text("Stats"),
