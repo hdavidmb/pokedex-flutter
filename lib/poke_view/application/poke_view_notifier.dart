@@ -39,7 +39,7 @@ class PokeViewNotifier extends ChangeNotifier {
     response.fold((l) => null, (response) {
       _pokeData = PokeData.fromPokeApiResponse(response);
     });
-    //await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(Duration(seconds: 1));
 
     _pokeSate = Ready();
   }

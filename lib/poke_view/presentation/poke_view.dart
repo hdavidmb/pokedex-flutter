@@ -56,24 +56,7 @@ class _Body extends StatelessWidget {
           PokeHeader(
             pokeData: poke,
           ),
-          Container(
-            child: Consumer(
-              builder: (context, watch, child) {
-                final provider = watch(pokeViewNotifierProvider);
-                final pokeState = provider.pokeState;
-
-                if (pokeState == PokeState.ready())
-                  return PokeTabBar(pokeData: provider.pokeData);
-
-                return Container(
-                  color: Colors.white,
-                  child: Center(
-                    child: PikaLoader(),
-                  ),
-                );
-              },
-            ),
-          ),
+          PokeTabBar(pokeName: poke.name)
         ],
       ),
     );

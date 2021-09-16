@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex_flutter/core/presentation/widgets/loaders/pika_loading.dart';
+import 'package:pokedex_flutter/poke_view/application/poke_state.dart';
+import 'package:pokedex_flutter/poke_view/application/poke_view_providers.dart';
 import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_tab.dart';
 
 import 'about_view.dart';
 
 class PokeTabBar extends StatefulWidget {
-  const PokeTabBar({Key? key, required this.pokeData}) : super(key: key);
-  final PokeData pokeData;
+  const PokeTabBar({Key? key, required this.pokeName}) : super(key: key);
+  final String pokeName;
 
   @override
   _TabBarState createState() => _TabBarState();
@@ -77,28 +81,71 @@ class _TabBarState extends State<PokeTabBar> {
             ),
           ),
           Expanded(
-            child: Container(
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(20)),
-              child: PageView(
-                onPageChanged: onPageVieweChangePage,
-                controller: _pageController,
-                children: [
-                  Container(
-                    child: AboutPage(),
-                  ),
-                  Container(
-                    child: Text("Stats"),
-                  ),
-                  Container(
-                    child: Text("Evolution"),
-                  ),
-                ],
-              ),
+            child: ContentTabs(
+              pokeName: widget.pokeName,
+              onPageVieweChangePage: onPageVieweChangePage,
+              pageController: _pageController,
             ),
           )
           //_PageViewer()
+        ],
+      ),
+    );
+  }
+}
+
+class ContentTabs extends StatelessWidget {
+  final String pokeName;
+  final Function(int tabNumber) onPageVieweChangePage;
+  final PageController pageController;
+  const ContentTabs(
+      {Key? key,
+      required this.onPageVieweChangePage,
+      required this.pageController,
+      required this.pokeName})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      context.read(pokeViewNotifierProvider).fecthPokeData('charman');
+    });
+
+    return Consumer(builder: (context, watch, child) {
+      final provider = watch(pokeViewNotifierProvider);
+      final pokeState = provider.pokeState;
+
+      if (pokeState == PokeState.ready())
+        return _tabsContent(pokeData: provider.pokeData);
+
+      return Container(
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(20)),
+        child: Center(
+          child: PikaLoader(),
+        ),
+      );
+    });
+  }
+
+  Widget _tabsContent({required PokeData pokeData}) {
+    return Container(
+      padding: EdgeInsets.all(30),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      child: PageView(
+        onPageChanged: onPageVieweChangePage,
+        controller: pageController,
+        children: [
+          Container(
+            child: AboutPage(),
+          ),
+          Container(
+            child: Text("Stats"),
+          ),
+          Container(
+            child: Text("Evolution"),
+          ),
         ],
       ),
     );
