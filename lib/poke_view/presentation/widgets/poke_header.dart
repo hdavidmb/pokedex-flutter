@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
+import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 
 class PokeHeader extends StatelessWidget {
-  const PokeHeader({Key? key}) : super(key: key);
+  const PokeHeader({Key? key, required this.pokeData}) : super(key: key);
 
   final size = 300.0;
+  final PokeData pokeData;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +16,16 @@ class PokeHeader extends StatelessWidget {
       padding: EdgeInsets.only(top: 50),
       height: size,
       width: double.infinity,
-      child: _HeaderStack(),
+      child: _HeaderStack(
+        pokeData: pokeData,
+      ),
     );
   }
 }
 
 class _HeaderStack extends StatelessWidget {
-  const _HeaderStack({Key? key}) : super(key: key);
+  const _HeaderStack({Key? key, required this.pokeData}) : super(key: key);
+  final PokeData pokeData;
 
   @override
   Widget build(BuildContext context) {
@@ -87,11 +92,10 @@ class _HeaderStack extends StatelessWidget {
           ),
         ),
         _PokeInfoCard(
-          type: Types.fire,
-          name: "Charmander",
-          id: "#004",
-          imageUrl:
-              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
+          type: pokeData.types!,
+          name: pokeData.pokeName!,
+          id: pokeData.pokeId!,
+          imageUrl: pokeData.pokeImageUrl!,
         ),
       ],
     );
@@ -110,7 +114,7 @@ class _PokeInfoCard extends StatelessWidget {
   final String imageUrl;
   final String id;
   final String name;
-  final Types type;
+  final List<Types> type;
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +150,7 @@ class _PokeInfoCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 30),
               ),
-              TypesWrap(types: [type])
+              TypesWrap(types: type)
             ],
           ),
         )
