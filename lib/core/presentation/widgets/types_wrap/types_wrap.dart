@@ -35,9 +35,9 @@ class TypeChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double padding = 5.0;
+    const double padding = 5.0;
     return Container(
-      padding: EdgeInsets.all(padding),
+      padding: const EdgeInsets.all(padding),
       height: itemHeight,
       decoration: BoxDecoration(
           color: type.chipColor, borderRadius: BorderRadius.circular(4.0)),

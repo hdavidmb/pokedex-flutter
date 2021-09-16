@@ -9,8 +9,9 @@ class PokemonListChangeNotifier extends ChangeNotifier {
     getPokemonList();
   }
 
-  PokemonListState _listState = PokemonListState.initial();
+  PokemonListState _listState = const PokemonListState.initial();
   PokemonListState get state => _listState;
+  // ignore: avoid_setters_without_getters
   set _state(PokemonListState state) {
     _listState = state;
     notifyListeners();
@@ -20,19 +21,17 @@ class PokemonListChangeNotifier extends ChangeNotifier {
   int _page = 1;
 
   Future<void> getPokemonList() async {
-    if (state != PokemonListState.loading()) {
-      _state = PokemonListState.loading();
-      print('*********** fetching pokemon ****************'); //TODO delete
-      final result = await pokemonListDataSource.getPokemonList(
-          page: _page, limit: 10); //TODO delete limit
+    if (state != const PokemonListState.loading()) {
+      _state = const PokemonListState.loading();
+      final result = await pokemonListDataSource.getPokemonList(page: _page);
       result.fold(
-        (l) => _state = PokemonListState.error(),
+        (l) => _state = const PokemonListState.error(),
         (r) {
           if (r.isNotEmpty) {
             pokemonList.addAll(r);
             _page++;
           }
-          _state = PokemonListState.ready();
+          _state = const PokemonListState.ready();
         },
       );
     }

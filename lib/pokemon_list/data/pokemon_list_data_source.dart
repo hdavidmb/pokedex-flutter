@@ -8,13 +8,13 @@ class PokemonListDataSource {
     final int firstIndex = limit * (page - 1);
     final int lastIndex = limit * page;
     if (firstIndex >= pokemonList.length) return right([]);
-    return Future.delayed(Duration(seconds: 1), () {
+    return Future.delayed(const Duration(seconds: 1), () {
       return right(pokemonList.sublist(
           firstIndex, lastIndex >= pokemonList.length ? null : lastIndex));
     });
   }
 
-  final List<PokemonListItem> pokemonList = [
+  final List<PokemonListItem> pokemonList = const [
     PokemonListItem(
       number: 1,
       name: 'Bulbasaur',

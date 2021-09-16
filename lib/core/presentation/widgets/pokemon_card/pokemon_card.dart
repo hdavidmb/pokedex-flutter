@@ -11,13 +11,13 @@ class PokemonCard extends StatelessWidget {
   final PokemonListItem pokemon;
   final void Function() onPressed;
 
-  final double itemHeight = 120.0;
-  final double offset = 22.0;
+  double get itemHeight => 120.0;
+  double get offset => 22.0;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: GestureDetector(
         onTap: onPressed,
         child: Stack(
@@ -48,7 +48,7 @@ class PokemonCard extends StatelessWidget {
                   Text('#${pokemon.number.toString().padLeft(3, '0')}'),
                   Text(
                     pokemon.name,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 25.0,
                         fontWeight: FontWeight.w700),
@@ -100,7 +100,7 @@ class PokemonCardBackground extends StatelessWidget {
             right: -pokeballSize * 0.1,
             child: ShaderMask(
               shaderCallback: (Rect bounds) {
-                return LinearGradient(
+                return const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [Colors.white, Colors.transparent],
@@ -125,7 +125,7 @@ class PokemonCardBackground extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [Colors.white.withOpacity(0.3), Colors.transparent],
-                    stops: [0.0, 1.0]).createShader(bounds);
+                    stops: const [0.0, 1.0]).createShader(bounds);
               },
               blendMode: BlendMode.dstIn,
               child: Image(

@@ -5,7 +5,7 @@ import 'package:pokedex_flutter/pokemon_list/application/pokemon_list_providers.
 import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
 class PokemonListPage extends StatefulWidget {
-  PokemonListPage({
+  const PokemonListPage({
     Key? key,
   }) : super(key: key);
 
@@ -23,7 +23,6 @@ class _PokemonListPageState extends State<PokemonListPage> {
       if (controller.position.pixels >=
           controller.position.maxScrollExtent - 500.0) {
         context.read(pokemonListChangeNotifierProvider).getPokemonList();
-        print(controller.position.pixels); //TODO delete print
       }
     });
   }
@@ -49,8 +48,8 @@ class _PokemonListPageState extends State<PokemonListPage> {
               itemBuilder: (_, index) => PokemonCard(
                 pokemon: pokemonList[index],
                 onPressed: () {
-                  //TODO: Navigaete to pokemon details
-                  print(pokemonList[index].name + ' pressed');
+                  //TODO: Navigate to pokemon details
+                  print('${pokemonList[index].name} pressed');
                 },
               ),
             );

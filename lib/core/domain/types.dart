@@ -110,12 +110,11 @@ extension TypesX on Types {
     }
   }
 
-  String get name =>
-      '${this.toString()[6].toUpperCase()}${this.toString().substring(7)}';
+  String get name => '${toString()[6].toUpperCase()}${toString().substring(7)}';
 
   Color get darkColor {
     final color = this.color;
-    final amount = 0.05; // * Must be between 0.0 and 1.0
+    const amount = 0.05; // * Must be between 0.0 and 1.0
 
     final hsl = HSLColor.fromColor(color);
     final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
@@ -125,7 +124,7 @@ extension TypesX on Types {
 
   Color get lightColor {
     final color = this.color;
-    final amount = 0.05; // * Must be between 0.0 and 1.0
+    const amount = 0.05; // * Must be between 0.0 and 1.0
 
     final hsl = HSLColor.fromColor(color);
     final hslDark = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
@@ -135,7 +134,7 @@ extension TypesX on Types {
 
   Color get chipColor {
     final color = this.color;
-    final amount = 0.08; // * Must be between 0.0 and 1.0
+    const amount = 0.08; // * Must be between 0.0 and 1.0
 
     final hsl = HSLColor.fromColor(color);
     final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));

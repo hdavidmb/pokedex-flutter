@@ -11,8 +11,8 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      await AppImages.precacheAssets(context);
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      AppImages.precacheAssets(context);
     });
     super.initState();
   }
@@ -24,7 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: PokemonListPage(),
+      home: const PokemonListPage(),
     );
   }
 }
