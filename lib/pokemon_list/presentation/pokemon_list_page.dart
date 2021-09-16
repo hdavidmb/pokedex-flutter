@@ -53,8 +53,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => PokeInfoView(
-                        pokeId: pokemonList[index].name,
-                        backgroundColor: pokemonList[index].types.first.color,
+                        poke: pokemonList[index],
                       ),
                     ),
                   );

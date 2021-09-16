@@ -7,60 +7,72 @@ import 'package:pokedex_flutter/poke_view/application/poke_view_providers.dart';
 import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_header.dart';
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_tabs.dart';
+import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
 class PokeInfoView extends StatelessWidget {
-  final String pokeId;
-  final Color backgroundColor;
-  const PokeInfoView(
-      {Key? key, required this.pokeId, required this.backgroundColor})
-      : super(key: key);
-
-  // I recived the PokeName and the color background.
+  final PokemonListItem poke;
+  const PokeInfoView({Key? key, required this.poke}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final pokeViewProvider = context.read(pokeViewNotifierProvider);
-
-    print("Fetching $pokeId");
-    pokeViewProvider.fecthPokeData(pokeId.toLowerCase());
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      context.read(pokeViewNotifierProvider).fecthPokeData(poke.name);
+    });
 
     return Scaffold(
       appBar: appBar,
       extendBodyBehindAppBar: true,
-      body: Container(child: Consumer(builder: (context, watch, child) {
-        // Postframe callback
-        final provider = watch(pokeViewNotifierProvider);
-        final pokeState = provider.pokeState;
-
-        if (pokeState == PokeState.ready())
-          return _Body(
-            pokeData: provider.pokeData,
-            backgroundColor: backgroundColor,
-          );
-
-        return PikaLoader();
-      })),
+      body: _Body(
+        poke: poke,
+      ),
     );
   }
 }
 
-class _Body extends StatelessWidget {
-  const _Body({Key? key, required this.pokeData, required this.backgroundColor})
-      : super(key: key);
+// body: Container(child: Consumer(
+//   builder: (context, watch, child) {
+//     // Postframe callback
+//     final provider = watch(pokeViewNotifierProvider);
+//     final pokeState = provider.pokeState;
 
-  final PokeData pokeData;
-  final Color backgroundColor;
+//     if (pokeState == PokeState.ready())
+//       return _Body(
+//         pokeData: provider.pokeData,
+//         backgroundColor: backgroundColor,
+//       );
+
+//     return PikaLoader();
+
+class _Body extends StatelessWidget {
+  const _Body({Key? key, required this.poke}) : super(key: key);
+
+  final PokemonListItem poke;
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: backgroundColor,
+      color: poke.types.first.darkColor,
       child: Column(
         children: [
           PokeHeader(
-            pokeData: pokeData,
+            pokeData: poke,
           ),
-          PokeTabBar(
-            pokeData: pokeData,
+          Container(
+            child: Consumer(
+              builder: (context, watch, child) {
+                final provider = watch(pokeViewNotifierProvider);
+                final pokeState = provider.pokeState;
+
+                if (pokeState == PokeState.ready())
+                  return PokeTabBar(pokeData: provider.pokeData);
+
+                return Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: PikaLoader(),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
