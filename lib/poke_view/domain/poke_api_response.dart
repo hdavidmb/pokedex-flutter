@@ -1,3 +1,5 @@
+import 'package:pokedex_flutter/core/domain/types.dart';
+
 class PokeApiResponse {
   String? pokeName;
   String? pokeId;
@@ -21,7 +23,7 @@ class PokeApiResponse {
         pokeId: json['id'].toString(),
         pokeImageUrl: json['sprites']['other']['official-artwork']
             ['front_default'],
-        types: ['fire'],
+        types: getTypesFromJson(json),
         description: 'dude');
   }
 }

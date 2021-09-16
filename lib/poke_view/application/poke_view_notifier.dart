@@ -36,28 +36,11 @@ class PokeViewNotifier extends ChangeNotifier {
     final Either<DatabaseFailure, PokeApiResponse> response =
         await pokeViewRepo.fetchPokeInfo(pokeId);
 
-    response.fold((l) {
-      print("Error dude");
-      print(l.toString());
-    }, (r) {
-      print("So far so good");
-      print(r.description);
-      print(r.pokeId);
-      print(r.pokeImageUrl);
-      print(r.pokeName);
+    response.fold((l) => null, (response) {
+      _pokeData = PokeData.fromPokeApiResponse(response);
     });
+    //await Future.delayed(Duration(seconds: 4));
 
-    await Future.delayed(Duration(seconds: 4));
-
-    _pokeData = PokeData(
-      pokeName: "Charmander",
-      pokeId: "#004",
-      pokeImageUrl:
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png',
-      types: [Types.fire],
-      description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta neque odio, at rutrum orci vulputate vitae. Sed elementum molestie mauris, vitae fringilla purus condimentum at. Fusce sit amet tincidunt libero. Integer non vulputate turpis, vitae mattis quam. Vestibulum placerat fringilla vehicula. Proin euismod imperdiet nisi. Ut laoreet a eros sed rutrum.",
-    );
     _pokeSate = Ready();
   }
 }

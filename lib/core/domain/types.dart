@@ -23,6 +23,72 @@ enum Types {
   water,
 }
 
+List<String> getTypesFromJson(Map<String, dynamic> json) {
+  List<dynamic> typesFromJson = json['types'];
+  List<String> types = [];
+
+  typesFromJson.forEach((element) {
+    print(element);
+    types.add(element['type']['name']);
+  });
+
+  return types;
+}
+
+Types typeFromString(String type) {
+  switch (type) {
+    case 'bug':
+      return Types.bug;
+    case 'dark':
+      return Types.dark;
+    case 'dragon':
+      return Types.dragon;
+    case 'electric':
+      return Types.electric;
+    case 'fairy':
+      return Types.fairy;
+    case 'fighting':
+      return Types.fighting;
+    case 'fire':
+      return Types.fire;
+    case 'flying':
+      return Types.flying;
+    case 'ghost':
+      return Types.ghost;
+    case 'grass':
+      return Types.grass;
+    case 'ground':
+      return Types.ground;
+    case 'ice':
+      return Types.ice;
+    case 'normal':
+      return Types.normal;
+    case 'poison':
+      return Types.poison;
+    case 'psychic':
+      return Types.psychic;
+    case 'rock':
+      return Types.rock;
+    case 'steel':
+      return Types.steel;
+    case 'water':
+      return Types.water;
+    default:
+      return Types.bug;
+  }
+}
+
+List<Types> fromStringToTypes(List<String> typesInString) {
+  List<Types> types = [];
+
+  typesInString.forEach((element) {
+    print(element);
+    types.add(typeFromString(element));
+  });
+
+  return types;
+}
+
 extension TypesX on Types {
   Color get color {
     switch (this) {
