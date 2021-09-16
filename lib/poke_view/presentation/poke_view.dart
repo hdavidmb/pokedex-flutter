@@ -9,14 +9,20 @@ import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_header.dart'
 import 'package:pokedex_flutter/poke_view/presentation/widgets/poke_tabs.dart';
 
 class PokeInfoView extends StatelessWidget {
-  const PokeInfoView({Key? key}) : super(key: key);
+  final String pokeId;
+  final Color backgroundColor;
+  const PokeInfoView(
+      {Key? key, required this.pokeId, required this.backgroundColor})
+      : super(key: key);
 
   // I recived the PokeName and the color background.
 
   @override
   Widget build(BuildContext context) {
     final pokeViewProvider = context.read(pokeViewNotifierProvider);
-    pokeViewProvider.fecthPokeData('charmander');
+
+    print("Fetching $pokeId");
+    pokeViewProvider.fecthPokeData(pokeId.toLowerCase());
 
     return Scaffold(
       appBar: appBar,
@@ -27,7 +33,10 @@ class PokeInfoView extends StatelessWidget {
         final pokeState = provider.pokeState;
 
         if (pokeState == PokeState.ready())
-          return _Body(pokeData: provider.pokeData);
+          return _Body(
+            pokeData: provider.pokeData,
+            backgroundColor: backgroundColor,
+          );
 
         return PikaLoader();
       })),
@@ -36,12 +45,13 @@ class PokeInfoView extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key? key, required this.pokeData}) : super(key: key);
+  const _Body({Key? key, required this.pokeData, required this.backgroundColor})
+      : super(key: key);
+
   final PokeData pokeData;
+  final Color backgroundColor;
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = Color(0xFFfba556);
-
     return Container(
       color: backgroundColor,
       child: Column(
