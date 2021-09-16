@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
 
 import 'data_list.dart';
 
 class AboutPage extends StatelessWidget {
-  const AboutPage({Key? key}) : super(key: key);
+  final PokeData pokeData;
+  const AboutPage({Key? key, required this.pokeData}) : super(key: key);
 
   final textStyle = const TextStyle(color: Colors.black54, fontSize: 16);
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = Color(0xFFfba556);
     final String description =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta neque odio, at rutrum orci vulputate vitae. Sed elementum molestie mauris, vitae fringilla purus condimentum at. Fusce sit amet tincidunt libero. Integer non vulputate turpis, vitae mattis quam. Vestibulum placerat fringilla vehicula. Proin euismod imperdiet nisi. Ut laoreet a eros sed rutrum.";
-
-    //  Data List
 
     return Container(
       child: ListView(
@@ -22,14 +21,14 @@ class AboutPage extends StatelessWidget {
           // Description
           Container(
             child: Text(
-              description,
+              pokeData.description!,
               style: textStyle,
             ),
           ),
           // Pokedex data
           Container(
             child: DataList(
-              color: backgroundColor,
+              color: pokeData.types!.first.color,
               keyValue: {
                 "Species": Text("Lizard pokemon"),
                 "Heigh": Column(
@@ -42,9 +41,6 @@ class AboutPage extends StatelessWidget {
             ),
           ),
           //Training
-          Container(
-            child: Text("hi"),
-          ),
         ],
       ),
     );
