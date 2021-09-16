@@ -12,6 +12,8 @@ class PokeApiRepo extends IPokeViewRepo {
   @override
   Future<Either<DatabaseFailure, PokeApiResponse>> fetchPokeInfo(
       String pokeId) async {
+    pokeId = pokeId.toLowerCase();
+
     final response = await http.get(Uri.parse('$POKE_URL/$pokeId'));
     print(response.body);
     print('$POKE_URL/$pokeId');

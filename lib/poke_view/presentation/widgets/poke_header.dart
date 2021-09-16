@@ -3,12 +3,13 @@ import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
 import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
+import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
 class PokeHeader extends StatelessWidget {
   const PokeHeader({Key? key, required this.pokeData}) : super(key: key);
 
   final size = 300.0;
-  final PokeData pokeData;
+  final PokemonListItem pokeData;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class PokeHeader extends StatelessWidget {
 
 class _HeaderStack extends StatelessWidget {
   const _HeaderStack({Key? key, required this.pokeData}) : super(key: key);
-  final PokeData pokeData;
+  final PokemonListItem pokeData;
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +93,10 @@ class _HeaderStack extends StatelessWidget {
           ),
         ),
         _PokeInfoCard(
-          type: pokeData.types!,
-          name: pokeData.pokeName!,
-          id: pokeData.pokeId!,
-          imageUrl: pokeData.pokeImageUrl!,
+          type: pokeData.types,
+          name: pokeData.name,
+          id: pokeData.number,
+          imageUrl: pokeData.imageUrl,
         ),
       ],
     );
@@ -112,7 +113,7 @@ class _PokeInfoCard extends StatelessWidget {
       : super(key: key);
 
   final String imageUrl;
-  final String id;
+  final int id;
   final String name;
   final List<Types> type;
 
@@ -140,7 +141,7 @@ class _PokeInfoCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                id,
+                '#${id.toString().padLeft(3, '0')}',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
