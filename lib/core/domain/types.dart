@@ -24,12 +24,12 @@ enum Types {
 }
 
 List<String> getTypesFromJson(Map<String, dynamic> json) {
-  List<dynamic> typesFromJson = json['types'];
+  List<dynamic> typesFromJson = json['types'] as List<dynamic>;
   List<String> types = [];
 
   typesFromJson.forEach((element) {
     print(element);
-    types.add(element['type']['name']);
+    types.add(element['type']['name'] as String);
   });
 
   return types;

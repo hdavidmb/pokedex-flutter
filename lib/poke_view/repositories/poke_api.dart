@@ -20,7 +20,7 @@ class PokeApiRepo extends IPokeViewRepo {
     if (pokeInfo.statusCode == 200) {
       return right(
         PokeApiPokemonResponse.fromJson(
-          jsonDecode(pokeInfo.body),
+          jsonDecode(pokeInfo.body) as Map<String, dynamic>,
         ),
       );
     } else {
@@ -40,7 +40,7 @@ class PokeApiRepo extends IPokeViewRepo {
     if (pokeSpecie.statusCode == 200) {
       return right(
         PokeSpecieResponse.fromJson(
-          jsonDecode(pokeSpecie.body),
+          jsonDecode(pokeSpecie.body) as Map<String, dynamic>,
         ),
       );
     } else {

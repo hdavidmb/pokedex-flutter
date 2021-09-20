@@ -33,11 +33,11 @@ class PokeApiPokemonResponse {
   factory PokeApiPokemonResponse.fromJson(Map<String, dynamic> pokeInfo) {
     print(pokeInfo['abilities']);
     return PokeApiPokemonResponse(
-      name: pokeInfo['name'],
-      pokeId: pokeInfo['id'],
-      height: pokeInfo['height'],
-      weight: pokeInfo['weight'],
-      baseExperience: pokeInfo['base_experience'],
+      name: pokeInfo['name'] as String,
+      pokeId: pokeInfo['id'] as int,
+      height: pokeInfo['height'] as int,
+      weight: pokeInfo['weight'] as int,
+      baseExperience: pokeInfo['base_experience'] as int,
       abilities: (pokeInfo['abilities'] as List)
           .map((item) => item as Map<String, dynamic>)
           .map((ability) {
