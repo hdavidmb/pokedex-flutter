@@ -1,41 +1,51 @@
 import 'package:pokedex_flutter/core/domain/types.dart';
-import 'package:pokedex_flutter/poke_view/domain/poke_api_response.dart';
+import 'package:pokedex_flutter/poke_view/domain/poke_repository/poke_api_response.dart';
 export 'package:pokedex_flutter/core/domain/types.dart';
 
 class PokeData {
-  String? pokeName;
-  String? pokeId;
-  String? pokeImageUrl;
-  List<Types>? types;
-  String? description;
+  String pokeName;
+  int pokeId;
+  double pokeHeight;
+  double pokeWeight;
+  List<Types> types;
+  Map<String, bool> abilities;
+  int baseExperience;
 
-  PokeData._empty();
+  // From species info
 
-  PokeData({
-    required this.pokeName,
-    required this.pokeId,
-    required this.pokeImageUrl,
-    required this.types,
-    required this.description,
-  });
+  final String evYield;
+  final int catchRate;
+  final int baseFriendship;
+  final String growthRate;
+  final String description;
+
+  PokeData(
+      {required this.pokeName,
+      required this.pokeId,
+      required this.pokeHeight,
+      required this.pokeWeight,
+      required this.types,
+      required this.abilities,
+      required this.baseExperience,
+      required this.baseFriendship,
+      required this.catchRate,
+      required this.evYield,
+      required this.growthRate,
+      required this.description});
 
   factory PokeData.empty() {
-    return PokeData._empty();
-  }
-
-  factory PokeData.fromPokeApiResponse(PokeApiResponse response) {
-    String internalPokeId = response.pokeId!;
-    String pokeApi = internalPokeId.length == 3
-        ? '#$internalPokeId'
-        : internalPokeId.length == 2
-            ? '#0$internalPokeId'
-            : '#00$internalPokeId';
-
     return PokeData(
-        description: response.description,
-        pokeName: response.pokeName,
-        pokeId: pokeApi,
-        pokeImageUrl: response.pokeImageUrl,
-        types: fromStringToTypes(response.types!));
+        abilities: {},
+        pokeHeight: 0,
+        pokeId: 0,
+        baseExperience: 0,
+        pokeName: "",
+        pokeWeight: 0,
+        types: [],
+        baseFriendship: 0,
+        catchRate: 0,
+        evYield: "",
+        growthRate: "",
+        description: "");
   }
 }
