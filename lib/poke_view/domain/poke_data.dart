@@ -1,5 +1,4 @@
 import 'package:pokedex_flutter/core/domain/types.dart';
-import 'package:pokedex_flutter/poke_view/domain/poke_repository/poke_api_response.dart';
 export 'package:pokedex_flutter/core/domain/types.dart';
 
 class PokeData {

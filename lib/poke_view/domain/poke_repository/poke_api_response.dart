@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
 
 class PokeApiPokemonResponse {
@@ -31,7 +30,6 @@ class PokeApiPokemonResponse {
     );
   }
   factory PokeApiPokemonResponse.fromJson(Map<String, dynamic> pokeInfo) {
-    print(pokeInfo['abilities']);
     return PokeApiPokemonResponse(
       name: pokeInfo['name'] as String,
       pokeId: pokeInfo['id'] as int,
@@ -41,8 +39,8 @@ class PokeApiPokemonResponse {
       abilities: (pokeInfo['abilities'] as List)
           .map((item) => item as Map<String, dynamic>)
           .map((ability) {
-        bool isVisible = ability['is_hidden'] as bool;
-        String name =
+        final bool isVisible = ability['is_hidden'] as bool;
+        final String name =
             (ability['ability']['name'] as String).replaceAll("-", " ");
 
         return {name: isVisible};

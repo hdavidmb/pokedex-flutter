@@ -7,11 +7,9 @@ class AboutPage extends StatelessWidget {
   final PokeData pokeData;
   const AboutPage({Key? key, required this.pokeData}) : super(key: key);
 
-  final textStyle = const TextStyle(color: Colors.black54, fontSize: 16);
-
   @override
   Widget build(BuildContext context) {
-    print(pokeData.abilities);
+    const textStyle = TextStyle(color: Colors.black54, fontSize: 16);
 
     return Container(
       child: ListView(
@@ -35,31 +33,23 @@ class AboutPage extends StatelessWidget {
             child: DataList(
               color: pokeData.types.first.color,
               keyValue: {
-                "Species": Text(''),
-                "Heigh": Text(pokeData.pokeHeight.toString() +
-                    "m" +
-                    ' (' +
-                    (pokeData.pokeHeight * 3.281)
-                        .toString()
-                        .substring(0, 4)
-                        .replaceAll('.', '\´') +
-                    '\")'),
-                "Weigh": Text(pokeData.pokeWeight.toString() +
-                    "Kg" +
-                    " (" +
-                    (pokeData.pokeWeight * 2.205).toString().substring(0, 4) +
-                    "lbs)"),
+                "Species": const Text(''),
+                "Heigh": Text(
+                    "${pokeData.pokeHeight.toString()}m (${(pokeData.pokeHeight * 3.281).toString().substring(0, 4).replaceAll('.', '\´')}\")"),
+                "Weigh": Text(
+                    "${pokeData.pokeWeight.toString()}Kg (${(pokeData.pokeWeight * 2.205).toString().substring(0, 4).replaceAll('.', '\´')}\")"),
                 "Abilities": Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: pokeData.abilities.entries
                         .map((e) => e.value
                             ? Text(
-                                e.key.capitalize() + "(hidden ability)",
-                                style: TextStyle(fontStyle: FontStyle.italic),
+                                "${e.key.capitalize()} (hidden ability)",
+                                style: const TextStyle(
+                                    fontStyle: FontStyle.italic),
                               )
                             : Text(
                                 e.key.capitalize(),
-                                style: TextStyle(fontSize: 18),
+                                style: const TextStyle(fontSize: 18),
                               ))
                         .toList())
               },
@@ -70,7 +60,7 @@ class AboutPage extends StatelessWidget {
             child: DataList(
               color: pokeData.types.first.color,
               keyValue: {
-                "EV Yield": Text(""),
+                "EV Yield": const Text(""),
                 "Catch rate": Text(pokeData.catchRate.toString()),
                 "Base friendship": Text(pokeData.baseFriendship.toString()),
                 "Base Exp": Text(pokeData.baseExperience.toString()),

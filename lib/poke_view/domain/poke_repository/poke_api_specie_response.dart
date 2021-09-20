@@ -17,8 +17,6 @@ class PokeSpecieResponse {
             (internalMap['language']['name'] as String) == 'en' &&
             (internalMap['version']['name'] as String) ==
                 'ruby')['flavor_text'] as String;
-    print('--------->' + desc);
-
     return PokeSpecieResponse(
         catchRate: json['capture_rate'] as int,
         growthRate: json['growth_rate']['name'] as String,

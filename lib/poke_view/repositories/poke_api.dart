@@ -13,9 +13,9 @@ class PokeApiRepo extends IPokeViewRepo {
   @override
   Future<Either<DatabaseFailure, PokeApiPokemonResponse>> fetchPokeInfo(
       String pokeId) async {
-    pokeId = pokeId.toLowerCase();
+    final String id = pokeId.toLowerCase();
 
-    final pokeInfo = await http.get(Uri.parse('$POKE_URL/pokemon/$pokeId'));
+    final pokeInfo = await http.get(Uri.parse('$POKE_URL/pokemon/$id'));
 
     if (pokeInfo.statusCode == 200) {
       return right(
@@ -24,19 +24,16 @@ class PokeApiRepo extends IPokeViewRepo {
         ),
       );
     } else {
-      return left(DatabaseFailure.serverFailure());
+      return left(const DatabaseFailure.serverFailure());
     }
   }
 
   @override
   Future<Either<DatabaseFailure, PokeSpecieResponse>> fetchPokeSpecieInfo(
       String pokeId) async {
-    pokeId = pokeId.toLowerCase();
+    final String id = pokeId.toLowerCase();
     final pokeSpecie =
-        await http.get(Uri.parse('$POKE_URL/pokemon-species/$pokeId'));
-    print('$POKE_URL/pokemon-species/$pokeId');
-    print(pokeSpecie.statusCode);
-    print(pokeSpecie.body);
+        await http.get(Uri.parse('$POKE_URL/pokemon-species/$id'));
     if (pokeSpecie.statusCode == 200) {
       return right(
         PokeSpecieResponse.fromJson(
@@ -44,8 +41,7 @@ class PokeApiRepo extends IPokeViewRepo {
         ),
       );
     } else {
-      print("On status code ");
-      return left(DatabaseFailure.serverFailure());
+      return left(const DatabaseFailure.serverFailure());
     }
   }
 }

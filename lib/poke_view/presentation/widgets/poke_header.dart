@@ -31,12 +31,7 @@ class _HeaderStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double dottedWidh = 100;
-    double stackWidth = MediaQuery.of(context).size.width;
-    double stackHigh = MediaQuery.of(context).size.height;
-
-    print(stackHigh);
-    print(stackWidth);
+    const double dottedWidh = 100;
     return Stack(
       children: [
         Positioned(
@@ -51,12 +46,12 @@ class _HeaderStack extends StatelessWidget {
                     Colors.white.withOpacity(0.6),
                     Colors.white.withOpacity(0.1)
                   ],
-                  stops: [
+                  stops: const [
                     0.0,
                     1.0
                   ]).createShader(rect);
             },
-            child: Image(
+            child: const Image(
               image: AppImages.dotted,
               width: dottedWidh,
               fit: BoxFit.cover,
@@ -79,14 +74,14 @@ class _HeaderStack extends StatelessWidget {
                   Colors.white.withOpacity(0.2),
                   Colors.transparent,
                 ],
-                stops: [
+                stops: const [
                   0.0,
                   2.0,
                   3.0,
                 ],
               ).createShader(rect);
             },
-            child: Image(
+            child: const Image(
               image: AppImages.pokeball,
               width: 150,
               color: Colors.white,
@@ -135,7 +130,7 @@ class _PokeInfoCard extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 30,
         ),
         Container(
@@ -145,11 +140,11 @@ class _PokeInfoCard extends StatelessWidget {
             children: [
               Text(
                 '#${id.toString().padLeft(3, '0')}',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
                 name,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30),

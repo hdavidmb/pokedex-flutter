@@ -37,10 +37,10 @@ class PokeTab extends StatelessWidget {
                       Colors.white.withOpacity(0.5),
                       Colors.white.withOpacity(0.05)
                     ],
-                    stops: [0.0, 1.0],
+                    stops: const [0.0, 1.0],
                   ).createShader(rect);
                 },
-                child: Image(
+                child: const Image(
                   image: AppImages.half_pokeBall,
                 ),
               ),

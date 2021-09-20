@@ -36,21 +36,22 @@ class DataList extends StatelessWidget {
     );
 
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: const EdgeInsets.symmetric(vertical: 20),
       child: Text(title, style: headerStyle),
     );
   }
 
   List<Widget> generateList(Map<String, Widget> bodyMap) {
-    List<Widget> result = [];
+    final List<Widget> result = [];
 
-    TextStyle keyStyle = TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
+    const TextStyle keyStyle =
+        TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
 
     // Body - Map list
 
     bodyMap.forEach((key, value) {
       result.add(Container(
-        margin: EdgeInsets.symmetric(vertical: 15),
+        margin: const EdgeInsets.symmetric(vertical: 15),
         child: Row(
           children: [
             Container(

@@ -13,13 +13,12 @@ class PokeViewNotifier extends ChangeNotifier {
   late PokeData _pokeData;
   IPokeViewRepo pokeViewRepo;
   PokeViewNotifier({required this.pokeViewRepo}) {
-    _innerPokeState = Initial();
+    _innerPokeState = const Initial();
     _pokeData = PokeData.empty();
   }
 
   set _pokeSate(PokeState newstate) {
-    print("Updating the poke sate");
-    this._innerPokeState = newstate;
+    _innerPokeState = newstate;
     notifyListeners();
   }
 
@@ -32,7 +31,7 @@ class PokeViewNotifier extends ChangeNotifier {
   }
 
   void fecthPokeData(String pokeId) async {
-    _pokeSate = Loading();
+    _pokeSate = const Loading();
 
     final Either<DatabaseFailure, PokeApiPokemonResponse> response =
         await pokeViewRepo.fetchPokeInfo(pokeId);
@@ -41,13 +40,13 @@ class PokeViewNotifier extends ChangeNotifier {
         await pokeViewRepo.fetchPokeSpecieInfo(pokeId);
 
     response.fold((l) => null, (poke) {
-      responseFromSpecie.fold((l) => print("DIUEEeeeeeeee"), (specie) {
+      responseFromSpecie.fold((l) => null, (specie) {
         _pokeData = PokeData(
             abilities: poke.abilities,
             pokeId: poke.pokeId,
             baseExperience: poke.baseExperience,
-            pokeHeight: (poke.height.toDouble() / 10),
-            pokeWeight: (poke.weight.toDouble() / 10),
+            pokeHeight: poke.height.toDouble() / 10, // To meters
+            pokeWeight: poke.weight.toDouble() / 10, // To Kg
             types: poke.types.map((e) => typeFromString(e)).toList(),
             pokeName: poke.name,
             baseFriendship: specie.baseHappiness,
@@ -57,8 +56,8 @@ class PokeViewNotifier extends ChangeNotifier {
             description: specie.flavorTextEntry);
       });
     });
-    await Future.delayed(Duration(seconds: 1));
+    //await Future.delayed(const Duration(milliseconds: 200));
 
-    _pokeSate = Ready();
+    _pokeSate = const Ready();
   }
 }
