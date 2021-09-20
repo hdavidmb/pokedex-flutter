@@ -11,8 +11,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String description =
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta neque odio, at rutrum orci vulputate vitae. Sed elementum molestie mauris, vitae fringilla purus condimentum at. Fusce sit amet tincidunt libero. Integer non vulputate turpis, vitae mattis quam. Vestibulum placerat fringilla vehicula. Proin euismod imperdiet nisi. Ut laoreet a eros sed rutrum.";
+    print(pokeData.abilities);
 
     return Container(
       child: ListView(
@@ -21,21 +20,62 @@ class AboutPage extends StatelessWidget {
           // Description
           Container(
             child: Text(
-              pokeData.description!,
+              pokeData.description
+                  .replaceAll('\n', ' ')
+                  .replaceAll('\t', ' ')
+                  .replaceAll('\f', ' ')
+                  .toLowerCase()
+                  .capitalize(),
               style: textStyle,
+              textAlign: TextAlign.justify,
             ),
           ),
           // Pokedex data
           Container(
             child: DataList(
-              color: pokeData.types!.first.color,
+              color: pokeData.types.first.color,
               keyValue: {
-                "Species": Text("Lizard pokemon"),
-                "Heigh": Column(
-                  children: [Text("Lizard pokemon"), Text("Lizard pokemon")],
-                ),
-                "Dudes on me": Text("Lizard pokemon"),
-                "Dudes on me2": Text("Lizard pokemon")
+                "Species": Text(''),
+                "Heigh": Text(pokeData.pokeHeight.toString() +
+                    "m" +
+                    ' (' +
+                    (pokeData.pokeHeight * 3.281)
+                        .toString()
+                        .substring(0, 4)
+                        .replaceAll('.', '\´') +
+                    '\")'),
+                "Weigh": Text(pokeData.pokeWeight.toString() +
+                    "Kg" +
+                    " (" +
+                    (pokeData.pokeWeight * 2.205).toString().substring(0, 4) +
+                    "lbs)"),
+                "Abilities": Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: pokeData.abilities.entries
+                        .map((e) => e.value
+                            ? Text(
+                                e.key.capitalize() + "(hidden ability)",
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              )
+                            : Text(
+                                e.key.capitalize(),
+                                style: TextStyle(fontSize: 18),
+                              ))
+                        .toList())
+              },
+              title: "Pokedex data",
+            ),
+          ),
+          Container(
+            child: DataList(
+              color: pokeData.types.first.color,
+              keyValue: {
+                "EV Yield": Text(""),
+                "Catch rate": Text(pokeData.catchRate.toString()),
+                "Base friendship": Text(pokeData.baseFriendship.toString()),
+                "Base Exp": Text(pokeData.baseExperience.toString()),
+                "Growh rate":
+                    Text(pokeData.growthRate.replaceAll('-', ' ').capitalize())
               },
               title: "Pokedex data",
             ),
@@ -44,5 +84,11 @@ class AboutPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+extension StringExtension on String {
+  String capitalize() {
+    return "${this[0].toUpperCase()}${this.substring(1)}";
   }
 }

@@ -78,17 +78,6 @@ Types typeFromString(String type) {
   }
 }
 
-List<Types> fromStringToTypes(List<String> typesInString) {
-  List<Types> types = [];
-
-  typesInString.forEach((element) {
-    print(element);
-    types.add(typeFromString(element));
-  });
-
-  return types;
-}
-
 extension TypesX on Types {
   Color get color {
     switch (this) {
