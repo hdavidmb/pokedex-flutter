@@ -12,6 +12,7 @@ class AppImages {
   static const female = _Image('female.png');
   static const dotted = _Image('dotted.png');
   static const pikloader = _Image('pika_loader.gif');
+  static const half_pokeBall = _Image('half-pokeball-2.png');
 
   static const bugTypeIcon = _Image('type_icons/bug.png');
   static const darkTypeIcon = _Image('type_icons/dark.png');
@@ -32,12 +33,13 @@ class AppImages {
   static const steelTypeIcon = _Image('type_icons/steel.png');
   static const waterTypeIcon = _Image('type_icons/water.png');
 
-  static void precacheAssets(BuildContext context) {
-    precacheImage(pokeball, context);
-    precacheImage(male, context);
-    precacheImage(female, context);
-    precacheImage(dotted, context);
-    precacheImage(pikloader, context);
+  static Future precacheAssets(BuildContext context) async {
+    await precacheImage(pokeball, context);
+    await precacheImage(male, context);
+    await precacheImage(female, context);
+    await precacheImage(dotted, context);
+    await precacheImage(pikloader, context);
+    await precacheImage(half_pokeBall, context);
 
     precacheImage(bugTypeIcon, context);
     precacheImage(darkTypeIcon, context);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/pokemon_card/pokemon_card.dart';
+import 'package:pokedex_flutter/poke_view/presentation/poke_view.dart';
 import 'package:pokedex_flutter/pokemon_list/application/pokemon_list_providers.dart';
 import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
@@ -48,8 +49,14 @@ class _PokemonListPageState extends State<PokemonListPage> {
               itemBuilder: (_, index) => PokemonCard(
                 pokemon: pokemonList[index],
                 onPressed: () {
-                  //TODO: Navigate to pokemon details
-                  print('${pokemonList[index].name} pressed');
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => PokeInfoView(
+                        poke: pokemonList[index],
+                      ),
+                    ),
+                  );
+                  print(pokemonList[index]);
                 },
               ),
             );
