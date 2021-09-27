@@ -4,6 +4,7 @@ import 'package:pokedex_flutter/config/app_images.dart';
 import 'package:pokedex_flutter/core/domain/types.dart';
 import 'package:pokedex_flutter/core/presentation/widgets/types_wrap/types_wrap.dart';
 import 'package:pokedex_flutter/poke_view/domain/poke_data.dart';
+import 'package:pokedex_flutter/pokemon_3d/presentation/poke_3d.dart';
 import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
 class PokeHeader extends StatelessWidget {
@@ -152,7 +153,17 @@ class _PokeInfoCard extends StatelessWidget {
               TypesWrap(types: type)
             ],
           ),
-        )
+        ),
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const Poke3D()
+                    ),
+                  );
+          },
+          icon: const Icon(Icons.view_in_ar_rounded, color: Colors.white),
+        ),
       ],
     );
   }

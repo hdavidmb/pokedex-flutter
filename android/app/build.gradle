@@ -35,7 +35,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.pokedex_flutter"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -54,6 +54,9 @@ flutter {
     source '../..'
 }
 
+
 dependencies {
+    implementation project(':unityLibrary')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
