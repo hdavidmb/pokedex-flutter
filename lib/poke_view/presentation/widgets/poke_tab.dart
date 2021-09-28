@@ -21,7 +21,7 @@ class PokeTab extends StatelessWidget {
       onTap: () {
         onTap(tabNumber);
       },
-      child: Container(
+      child: SizedBox(
         width: 120,
         height: 70,
         child: Stack(
@@ -31,8 +31,6 @@ class PokeTab extends StatelessWidget {
               ShaderMask(
                 shaderCallback: (Rect rect) {
                   return LinearGradient(
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
                     colors: [
                       Colors.white.withOpacity(0.5),
                       Colors.white.withOpacity(0.05)
