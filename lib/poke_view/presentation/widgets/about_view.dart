@@ -31,9 +31,9 @@ class AboutPage extends StatelessWidget {
           keyValue: {
             "Species": const Text(''),
             "Heigh": Text(
-                '${pokeData.pokeHeight.toString()}m (${(pokeData.pokeHeight * 3.281).toString().substring(0, 4).replaceAll('.', '´')}")'),
+                '${pokeData.pokeHeight.toString()} m (${(pokeData.pokeHeight * 3.281).toString().substring(0, 4).replaceAll('.', '´')}")'),
             "Weigh": Text(
-                '${pokeData.pokeWeight.toString()}Kg (${(pokeData.pokeWeight * 2.205).toString().substring(0, 4).replaceAll('.', '´')}")'),
+                '${pokeData.pokeWeight.toString()} kg (${(pokeData.pokeWeight * 2.205).toString().substring(0, 4)} lbs)'),
             "Abilities": Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
