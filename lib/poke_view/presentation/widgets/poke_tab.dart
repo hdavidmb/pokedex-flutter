@@ -41,7 +41,7 @@ class PokeTab extends StatelessWidget {
                   ).createShader(rect);
                 },
                 child: const Image(
-                  image: AppImages.half_pokeBall,
+                  image: AppImages.halfPokeBall,
                 ),
               ),
             Text(name,
