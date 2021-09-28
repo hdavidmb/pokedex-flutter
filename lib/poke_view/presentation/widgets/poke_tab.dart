@@ -44,14 +44,15 @@ class PokeTab extends StatelessWidget {
                   image: AppImages.halfPokeBall,
                 ),
               ),
-            Text(name,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color:
-                      selectedTab == tabNumber ? Colors.white : Colors.white30,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ))
+            Text(
+              name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: selectedTab == tabNumber ? Colors.white : Colors.white30,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ],
         ),
       ),
