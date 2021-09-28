@@ -8,14 +8,14 @@ import 'package:pokedex_flutter/poke_view/domain/poke_repository/poke_api_specie
 import 'package:pokedex_flutter/poke_view/repositories/i_poke_repo.dart';
 
 class PokeApiRepo extends IPokeViewRepo {
-  final String POKE_URL = "https://pokeapi.co/api/v2";
+  final String pokeUrl = "https://pokeapi.co/api/v2";
 
   @override
   Future<Either<DatabaseFailure, PokeApiPokemonResponse>> fetchPokeInfo(
       String pokeId) async {
     final String id = pokeId.toLowerCase();
 
-    final pokeInfo = await http.get(Uri.parse('$POKE_URL/pokemon/$id'));
+    final pokeInfo = await http.get(Uri.parse('$pokeUrl/pokemon/$id'));
 
     if (pokeInfo.statusCode == 200) {
       return right(
@@ -33,7 +33,7 @@ class PokeApiRepo extends IPokeViewRepo {
       String pokeId) async {
     final String id = pokeId.toLowerCase();
     final pokeSpecie =
-        await http.get(Uri.parse('$POKE_URL/pokemon-species/$id'));
+        await http.get(Uri.parse('$pokeUrl/pokemon-species/$id'));
     if (pokeSpecie.statusCode == 200) {
       return right(
         PokeSpecieResponse.fromJson(
