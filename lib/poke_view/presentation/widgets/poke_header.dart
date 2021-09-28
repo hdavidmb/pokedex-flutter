@@ -9,13 +9,13 @@ import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 class PokeHeader extends StatelessWidget {
   const PokeHeader({Key? key, required this.pokeData}) : super(key: key);
 
-  final size = 300.0;
+  double get size => 300.0;
   final PokemonListItem pokeData;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 50),
+      padding: const EdgeInsets.only(top: 50),
       height: size,
       width: double.infinity,
       child: _HeaderStack(
@@ -117,9 +117,8 @@ class _PokeInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
+        SizedBox(
           height: 130,
           width: 130,
           child: Hero(
@@ -133,25 +132,23 @@ class _PokeInfoCard extends StatelessWidget {
         const SizedBox(
           width: 30,
         ),
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '#${id.toString().padLeft(3, '0')}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                name,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30),
-              ),
-              TypesWrap(types: type)
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '#${id.toString().padLeft(3, '0')}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              name,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+            TypesWrap(types: type)
+          ],
         )
       ],
     );
