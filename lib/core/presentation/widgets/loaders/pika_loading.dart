@@ -6,14 +6,12 @@ class PikaLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Image(
-          image: AppImages.pikloader,
-          fit: BoxFit.contain,
-          width: 150,
-          height: 150,
-        ),
+    return const Center(
+      child: Image(
+        image: AppImages.pikloader,
+        fit: BoxFit.contain,
+        width: 150,
+        height: 150,
       ),
     );
   }

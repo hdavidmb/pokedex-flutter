@@ -17,20 +17,21 @@ class PokeViewNotifier extends ChangeNotifier {
     _pokeData = PokeData.empty();
   }
 
+  // ignore: avoid_setters_without_getters
   set _pokeSate(PokeState newstate) {
     _innerPokeState = newstate;
     notifyListeners();
   }
 
   PokeData get pokeData {
-    return this._pokeData;
+    return _pokeData;
   }
 
   PokeState get pokeState {
     return _innerPokeState;
   }
 
-  void fecthPokeData(String pokeId) async {
+  Future<void> fecthPokeData(String pokeId) async {
     _pokeSate = const Loading();
 
     final Either<DatabaseFailure, PokeApiPokemonResponse> response =

@@ -34,7 +34,7 @@ class PokemonCard extends StatelessWidget {
               top: 0.0,
               right: itemHeight * 0.1,
               child: Hero(
-                tag: pokemon.name, //TODO: sync with details image
+                tag: pokemon.name,
                 child: CachedNetworkImage(
                     imageUrl: pokemon.imageUrl, height: itemHeight * 1.08),
               ),

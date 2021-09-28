@@ -8,15 +8,12 @@ import 'package:pokedex_flutter/pokemon_list/domain/pokemon_list_item.dart';
 
 class PokeHeader extends StatelessWidget {
   const PokeHeader({Key? key, required this.pokeData}) : super(key: key);
-
-  final size = 300.0;
   final PokemonListItem pokeData;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 50),
-      height: size,
+      padding: const EdgeInsets.only(top: 80.0, bottom: 20.0),
       width: double.infinity,
       child: _HeaderStack(
         pokeData: pokeData,
@@ -31,11 +28,11 @@ class _HeaderStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double dottedWidh = 100;
+    const double dottedWidh = 80;
     return Stack(
       children: [
         Positioned(
-          top: 160,
+          bottom: 0,
           right: 0,
           child: ShaderMask(
             shaderCallback: (Rect rect) {
@@ -55,36 +52,6 @@ class _HeaderStack extends StatelessWidget {
               image: AppImages.dotted,
               width: dottedWidh,
               fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 35,
-          left: 20,
-          child: ShaderMask(
-            shaderCallback: (Rect rect) {
-              return RadialGradient(
-                // center: Alignment.bottomRight,
-                // focal: Alignment.topLeft,
-                center: Alignment.topLeft,
-                focal: Alignment.bottomRight,
-                radius: 1.009,
-                colors: [
-                  Colors.white,
-                  Colors.white.withOpacity(0.2),
-                  Colors.transparent,
-                ],
-                stops: const [
-                  0.0,
-                  2.0,
-                  3.0,
-                ],
-              ).createShader(rect);
-            },
-            child: const Image(
-              image: AppImages.pokeball,
-              width: 150,
-              color: Colors.white,
             ),
           ),
         ),
@@ -117,41 +84,68 @@ class _PokeInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Container(
-          height: 130,
-          width: 130,
-          child: Hero(
-            tag: name,
-            child: CachedNetworkImage(
-              fit: BoxFit.cover,
-              imageUrl: imageUrl,
+        Stack(
+          children: [
+            ShaderMask(
+              shaderCallback: (Rect rect) {
+                return RadialGradient(
+                  // center: Alignment.bottomRight,
+                  // focal: Alignment.topLeft,
+                  center: Alignment.topLeft,
+                  focal: Alignment.bottomRight,
+                  radius: 1.009,
+                  colors: [
+                    Colors.white,
+                    Colors.white.withOpacity(0.2),
+                    Colors.transparent,
+                  ],
+                  stops: const [
+                    0.0,
+                    2.0,
+                    3.0,
+                  ],
+                ).createShader(rect);
+              },
+              child: const Image(
+                image: AppImages.pokeball,
+                width: 130,
+                color: Colors.white,
+              ),
             ),
-          ),
+            SizedBox(
+              height: 130,
+              width: 130,
+              child: Hero(
+                tag: name,
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  imageUrl: imageUrl,
+                ),
+              ),
+            ),
+          ],
         ),
         const SizedBox(
-          width: 30,
+          width: 20,
         ),
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '#${id.toString().padLeft(3, '0')}',
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                name,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30),
-              ),
-              TypesWrap(types: type)
-            ],
-          ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '#${id.toString().padLeft(3, '0')}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              name,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30),
+            ),
+            TypesWrap(types: type)
+          ],
         )
       ],
     );

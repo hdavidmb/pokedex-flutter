@@ -14,17 +14,15 @@ class DataList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget generatedHeader = generateHeader(title);
-    List<Widget> generatedList = generateList(keyValue);
+    final Widget generatedHeader = generateHeader(title);
+    final List<Widget> generatedList = generateList(keyValue);
 
     // Joining header.
     generatedList.insert(0, generatedHeader);
 
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: generatedList,
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: generatedList,
     );
   }
 
@@ -54,7 +52,7 @@ class DataList extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 15),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 140,
               child: Text(
                 key,

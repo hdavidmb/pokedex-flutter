@@ -35,22 +35,22 @@ class _TabBarState extends State<PokeTabBar> {
     super.dispose();
   }
 
-  selectTab(int tabNumber) {
-    if (tabNumber == this.selectedTab) return;
+  void selectTab(int tabNumber) {
+    if (tabNumber == selectedTab) return;
 
     setState(() {
-      this.selectedTab = tabNumber;
+      selectedTab = tabNumber;
       _pageController.animateToPage(
         tabNumber,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.fastLinearToSlowEaseIn,
       );
     });
   }
 
-  onPageVieweChangePage(int tabNumber) {
+  void onPageVieweChangePage(int tabNumber) {
     setState(() {
-      this.selectedTab = tabNumber;
+      selectedTab = tabNumber;
     });
   }
 
@@ -60,28 +60,26 @@ class _TabBarState extends State<PokeTabBar> {
     return Expanded(
       child: Column(
         children: [
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                PokeTab(
-                    name: "About",
-                    tabNumber: 0,
-                    selectedTab: selectedTab,
-                    onTap: selectTab),
-                PokeTab(
-                    name: "Stats",
-                    tabNumber: 1,
-                    selectedTab: selectedTab,
-                    onTap: selectTab),
-                PokeTab(
-                  name: "Evolution",
-                  tabNumber: 2,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              PokeTab(
+                  name: "About",
+                  tabNumber: 0,
                   selectedTab: selectedTab,
-                  onTap: selectTab,
-                ),
-              ],
-            ),
+                  onTap: selectTab),
+              PokeTab(
+                  name: "Stats",
+                  tabNumber: 1,
+                  selectedTab: selectedTab,
+                  onTap: selectTab),
+              PokeTab(
+                name: "Evolution",
+                tabNumber: 2,
+                selectedTab: selectedTab,
+                onTap: selectTab,
+              ),
+            ],
           ),
           Expanded(
             child: ContentTabs(
@@ -110,43 +108,50 @@ class ContentTabs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, watch, child) {
-      final provider = watch(pokeViewNotifierProvider);
-      final pokeState = provider.pokeState;
+    return Consumer(
+      builder: (context, watch, child) {
+        final provider = watch(pokeViewNotifierProvider);
+        final pokeState = provider.pokeState;
 
-      if (pokeState == PokeState.ready())
-        return _tabsContent(pokeData: provider.pokeData);
+        if (pokeState == const PokeState.ready()) {
+          return _tabsContent(pokeData: provider.pokeData);
+        }
 
-      return Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(20)),
-        child: const Center(
-          child: PikaLoader(),
-        ),
-      );
-    });
+        return Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
+          child: const Center(
+            child: PikaLoader(),
+          ),
+        );
+      },
+    );
   }
 
   Widget _tabsContent({required PokeData pokeData}) {
     return Container(
       padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: PageView(
         onPageChanged: onPageVieweChangePage,
         controller: pageController,
         children: [
-          Container(
-            child: AboutPage(
-              pokeData: pokeData,
-            ),
+          AboutPage(
+            pokeData: pokeData,
           ),
-          Container(
-            child: const Text("Stats"),
-          ),
-          Container(
-            child: const Text("Evolution"),
-          ),
+          const Text("Stats"),
+          const Text("Evolution"),
         ],
       ),
     );

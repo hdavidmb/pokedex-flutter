@@ -56,7 +56,6 @@ class _PokemonListPageState extends State<PokemonListPage> {
                       ),
                     ),
                   );
-                  print(pokemonList[index]);
                 },
               ),
             );
