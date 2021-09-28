@@ -118,8 +118,13 @@ class ContentTabs extends StatelessWidget {
         }
 
         return Container(
-          decoration: BoxDecoration(
-              color: Colors.white, borderRadius: BorderRadius.circular(20)),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
+          ),
           child: const Center(
             child: PikaLoader(),
           ),
@@ -131,8 +136,13 @@ class ContentTabs extends StatelessWidget {
   Widget _tabsContent({required PokeData pokeData}) {
     return Container(
       padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       child: PageView(
         onPageChanged: onPageVieweChangePage,
         controller: pageController,
