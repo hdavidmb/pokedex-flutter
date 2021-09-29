@@ -157,10 +157,8 @@ class _PokeInfoCard extends StatelessWidget {
         IconButton(
           onPressed: () {
             Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const Poke3D()
-                    ),
-                  );
+              MaterialPageRoute(builder: (context) => Poke3D(name: name)),
+            );
           },
           icon: const Icon(Icons.view_in_ar_rounded, color: Colors.white),
         ),
