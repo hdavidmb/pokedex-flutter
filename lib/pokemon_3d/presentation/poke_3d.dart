@@ -14,11 +14,15 @@ class Poke3D extends StatefulWidget {
 
 class _Poke3DState extends State<Poke3D> {
   UnityWidgetController? _unityWidgetController;
-  double _sliderValue = 0;
+  late double _rotationX;
+  late double _rotationY;
 
   @override
   void initState() {
     super.initState();
+
+    _rotationX = 0;
+    _rotationY = 0;
   }
 
   @override
@@ -33,13 +37,8 @@ class _Poke3DState extends State<Poke3D> {
       extendBodyBehindAppBar: true,
       appBar: appBar,
       body: GestureDetector(
-        onHorizontalDragUpdate: (DragUpdateDetails details) {
-          setState(() {
-            _sliderValue -= details.delta.dx * 1.5;
-          });
-          _unityWidgetController?.postMessage('GameObject', 'InvokePokemon', widget.name);
-          // setRotationSpeed(_sliderValue.toString());
-        },
+        onHorizontalDragUpdate: setPokemonRotation,
+        onVerticalDragUpdate: setPokemonRotation,
         child: UnityWidget(
           onUnityCreated: _onUnityCreated,
           onUnityMessage: onUnityMessage,
@@ -49,13 +48,21 @@ class _Poke3DState extends State<Poke3D> {
     );
   }
 
-  // void setRotationSpeed(String speed) {
-  //   _unityWidgetController?.postMessage(
-  //     'MewPrefab',
-  //     'SetRotationSpeed',
-  //     speed,
-  //   );
-  // }
+  void setPokemonRotation(DragUpdateDetails details) {
+    setState(() {
+      _rotationY -= details.delta.dx * 1.5;
+      _rotationX += details.delta.dy;
+    });
+
+    if (_rotationX < -30) _rotationX = -30;
+    if (_rotationX > 45) _rotationX = 45;
+
+    _unityWidgetController?.postMessage(
+      'PokemonHolder',
+      'SetPokemonRotation',
+      '$_rotationX:$_rotationY',
+    );
+  }
 
   void onUnityMessage(dynamic message) {
     log(message.toString());
@@ -72,6 +79,7 @@ class _Poke3DState extends State<Poke3D> {
   void _onUnityCreated(UnityWidgetController controller) {
     log('Unity Created');
     _unityWidgetController = controller;
-    _unityWidgetController?.postMessage('GameManager', 'InvokePokemon', widget.name);
+    _unityWidgetController?.postMessage(
+        'GameManager', 'InvokePokemon', widget.name);
   }
 }
