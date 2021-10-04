@@ -78,6 +78,7 @@ class _Poke3DState extends State<Poke3D> {
   // ignore: use_setters_to_change_properties
   void _onUnityCreated(UnityWidgetController controller) {
     log('Unity Created');
+    log(widget.name);
     _unityWidgetController = controller;
     _unityWidgetController?.postMessage(
         'GameManager', 'InvokePokemon', widget.name);
