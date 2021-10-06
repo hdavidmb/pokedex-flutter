@@ -41,7 +41,25 @@ class _Poke3DState extends State<Poke3D> {
         onVerticalDragUpdate: setPokemonRotation,
         child: UnityWidget(
           onUnityCreated: _onUnityCreated,
-          onUnityMessage: onUnityMessage,
+          onUnityMessage: (dynamic message) async {
+            await showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                    backgroundColor: Colors.white,
+                    content: Text(message.toString()),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Ok'),
+                      )
+                    ]);
+              },
+            );
+            return Navigator.pop(context);
+          },
           onUnitySceneLoaded: onUnitySceneLoaded,
         ),
       ),
@@ -57,6 +75,8 @@ class _Poke3DState extends State<Poke3D> {
     if (_rotationX < -30) _rotationX = -30;
     if (_rotationX > 45) _rotationX = 45;
 
+    log('$_rotationX:$_rotationY');
+    
     _unityWidgetController?.postMessage(
       'PokemonHolder',
       'SetPokemonRotation',
@@ -65,7 +85,7 @@ class _Poke3DState extends State<Poke3D> {
   }
 
   void onUnityMessage(dynamic message) {
-    log(message.toString());
+    // log(message.toString());
   }
 
   void onUnitySceneLoaded(SceneLoaded? scene) {
