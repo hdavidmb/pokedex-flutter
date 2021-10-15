@@ -36,17 +36,16 @@ class _PokemonListPageState extends State<PokemonListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: Consumer(
-          builder: (context, watch, child) {
-            final provider = watch(pokemonListChangeNotifierProvider);
-            final List<PokemonListItem> pokemonList = provider.pokemonList;
-            return ListView.builder(
-              controller: controller,
-              itemCount: pokemonList.length,
-              itemBuilder: (_, index) => PokemonCard(
+    return Consumer(
+      builder: (context, watch, child) {
+        final provider = watch(pokemonListChangeNotifierProvider);
+        final List<PokemonListItem> pokemonList = provider.pokemonList;
+        return SliverList(
+          // controller: controller,
+          delegate: SliverChildBuilderDelegate(
+            (_, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: PokemonCard(
                 pokemon: pokemonList[index],
                 onPressed: () {
                   Navigator.of(context).push(
@@ -58,10 +57,11 @@ class _PokemonListPageState extends State<PokemonListPage> {
                   );
                 },
               ),
-            );
-          },
-        ),
-      ),
+            ),
+            childCount: pokemonList.length,
+          ),
+        );
+      },
     );
   }
 }

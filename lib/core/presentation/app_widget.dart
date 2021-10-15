@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex_flutter/config/app_images.dart';
-import 'package:pokedex_flutter/pokemon_list/presentation/pokemon_list_page.dart';
+import 'package:pokedex_flutter/core/presentation/pages/home_page.dart';
 
 class AppWidget extends StatefulWidget {
   // This widget is the root of your application.
@@ -24,7 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const PokemonListPage(),
+      home: const HomePage(),
     );
   }
 }
