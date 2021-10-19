@@ -41,11 +41,13 @@ class _PokemonListPageState extends State<PokemonListPage> {
         final provider = watch(pokemonListChangeNotifierProvider);
         final List<PokemonListItem> pokemonList = provider.pokemonList;
         return SliverList(
+          key: const Key('pokemonList'),
           // controller: controller,
           delegate: SliverChildBuilderDelegate(
             (_, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: PokemonCard(
+                key: Key('pokemon_$index'),
                 pokemon: pokemonList[index],
                 onPressed: () {
                   Navigator.of(context).push(
