@@ -258,7 +258,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.2"
-<<<<<<< Updated upstream
   flutter_chips_input:
     dependency: "direct main"
     description:
@@ -266,13 +265,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-=======
   flutter_driver:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
->>>>>>> Stashed changes
   flutter_riverpod:
     dependency: "direct main"
     description:
